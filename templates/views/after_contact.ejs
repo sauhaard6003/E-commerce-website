@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            color:red;
+        }
+        .contact_form:hover{
+            height:50px;
+            width:200px; 
+            color: black; 
+            background-color: orange;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="col-md-20 col-30 hero-text order-md-0 order-1 d-flex justify-content-center align-items-center flex-column">
+        <form action="/" id="form_final">
+            <h2>You sent:</h2>
+            <p>Name: <%=body.name%></p>
+            <p>Email: <%=body.email%></p>
+            <p>Phone Number: <%=body.PhoneNumber%></p>
+            <p>Message: <%=body.message%></p>
+            <h1>Your response has been submitted</h1>
+            <input type="submit" class="contact_form" style="color:black; height:50px;
+            width:200px" value="Go back to home page">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("form_final").addEventListener('submit',(event)=>{
+            event.preventDefault();
+            window.location.pathname='/';
+        })
+    </script>
+</body>
+
+
+</html>
