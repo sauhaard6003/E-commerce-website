@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup Page</title>
+  <style>
+    body {
+      background-color: #f1f1f1;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+    }
+    
+    form input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+    
+    form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    
+    form button:hover {
+      background-color: #45a049;
+    }
+    
+    p {
+      margin-top: 20px;
+    }
+  
+    p#message {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333;
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+  </style>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Signup</h1>
+    <form action="/" id="signup_form">
+      <input type="text" placeholder="Username" name="Username">
+      <input type="password" placeholder="Password" name="Password">
+      <button type="submit">Signup</button>
+    </form>
+    <p>Already have an account?<button onclick="GoToLoginPage()">Login</button></p>
+    <p id="message"></p>
+  </div>
+  <script>
+    var curr_url = window.location.href;
+    console.log(curr_url);
+    var s="";
+    var i=curr_url.length-1;
+    for (;i>=0;i--){
+        if (curr_url[i]=='/') break;
+    }
+    var t=curr_url.substring(0,i);
+    console.log(t);
+    function GoToLoginPage(){
+        document.getElementById("message").innerText="Redirecting you in 5 seconds..."
+        setTimeout(()=>{
+            window.location.href=t+"/login";
+        },5000);
+    }
+
+    var form=document.getElementById("signup_form");
+    form.addEventListener('submit',async (event)=>{
+        event.preventDefault();
+        //console.log(form.Username.value);
+        let x=await axios.post(t+'/setcookie',{Username:form.Username.value,Password:form.Password.value});
+        if (x.data.done){
+            document.getElementById("message").innerText="Redirecting you in 5 seconds..."
+            setTimeout(()=>{
+                window.location.href=t+"/index";
+            },5000);
+        }
+        else{
+            document.getElementById("message").innerText=x.data.error
+        }
+    })
+  </script>
+</body>
+</html>

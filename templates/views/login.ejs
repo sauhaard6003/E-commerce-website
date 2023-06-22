@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Login Page</title>
+  <style>
+    body {
+      background-color: #f1f1f1;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+    }
+    
+    form input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+    
+    form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    
+    form button:hover {
+      background-color: #45a049;
+    }
+    
+    p {
+      margin-top: 20px;
+    }
+  
+    p#message {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #333;
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+  </style>
+  
+</head>
+<body>
+  <div class="container">
+    <h1>Login</h1>
+    <form id="login_form" action="/login" method="GET">
+      <input type="text" placeholder="Username" name="Username">
+      <input type="password" placeholder="Password" name="Password">
+      <button type="submit" id="submit">Login</button>
+    </form>
+    <p>Don't have an account?<button onclick="GoToSignupPage()">Sign up</button></p>
+    <p id="message"></p>
+  </div>
+    <script>
+    var curr_url;
+    curr_url = window.location.href;
+    var s="";
+    var i=curr_url.length-1;
+    for (;i>=0;i--){
+        if (curr_url[i]=='/') break;
+    }
+    var t=curr_url.substring(0,i);
+    
+    function GoToSignupPage(){
+        document.getElementById("message").innerText="Redirecting you in 5 seconds..."
+        setTimeout(()=>{
+            window.location.href=t+"/signup";
+        },5000);
+    }
+  </script>
+</body>
+</html>
